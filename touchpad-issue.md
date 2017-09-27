@@ -57,4 +57,4 @@ and there
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i8042.nomux=1 i8042.reset"
 ```
-
+**no removed again**
