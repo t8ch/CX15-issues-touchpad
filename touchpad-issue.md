@@ -5,13 +5,21 @@ see discussion in: https://forums.lenovo.com/t5/forums/v3_1/forumtopicpage/board
 
 I seem to have an ELAN touchpad
 
-## feedback
+## feedback from system
 ```
 grep -e "Using input driver 'libinput'" /var/log/Xorg.0.log
+dmesg > dmesg.log
+dmesg | grep -E 'psmouse|touch|rmi'
+xinput
+
 ```
 
 ## install (custom) kernels from package
-download and unzip 
+- download and unzip to /usr/src
+- give permissions
+```
+sudo chmod 775 ubuntu-linux-kernel-4.12.7-custom-master
+```
 ```
 dpkg -i *.deb
 ```
@@ -41,11 +49,12 @@ herfurtht@Lenovo:~$ xinput
     ↳ ThinkPad Extra Buttons                  	id=11	[slave  keyboard (3)]
     ↳ Integrated Camera                       	id=12	[slave  keyboard (3)]
 ```
-- boot options
+- boot options in
 ```
-i8042.nomux=1 i8042.reset
+sudo gedit /etc/default/grub
 ```
-- ```
-~$ dmesg | grep -E 'psmouse|touch'
-[    3.595796] psmouse serio1: ****[X1C] Touchpad Firmware Id = LEN0073 PNP0f13 *****
+and there
 ```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i8042.nomux=1 i8042.reset"
+```
+
