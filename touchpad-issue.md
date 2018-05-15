@@ -5,6 +5,25 @@ see discussion in: https://forums.lenovo.com/t5/forums/v3_1/forumtopicpage/board
 
 I seem to have an ELAN touchpad
 
+## what finally worked
+@ ubuntu 18.04;  4.15.0-20-generic
+- remove comment in /etc/modprobe.d/touchpad.conf
+```
+sudo modprobe -r psmouse
+sudo modprobe psmouse
+```
+- according to: https://unix.stackexchange.com/questions/428975/lenovo-x1-carbon-gen-6-2018-touchpad-and-trackpoint-issues-with-linux/431820#431820 comment out "i2c_i801" from /etc/modprobe.d/blacklist.conf
+- adding "psmouse.synaptics_intertouch=1" to the GRUB_CMDLINE_LINUX_DEFAULT= line in /etc/default/grub
+- sudo update-grub
+now:
+```
+egrep -i 'synap|alps|etps|elan' /proc/bus/input/devices
+N: Name="Synaptics TM3288-003"
+N: Name="TPPS/2 Elan TrackPoint"
+P: Phys=synaptics-rmi4-pt/serio1/input0
+```
+----- RESOLVED -----
+
 ## feedback from system
 ```
 grep -e "Using input driver 'libinput'" /var/log/Xorg.0.log
