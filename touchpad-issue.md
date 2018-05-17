@@ -15,6 +15,13 @@ sudo modprobe psmouse
 - according to: https://unix.stackexchange.com/questions/428975/lenovo-x1-carbon-gen-6-2018-touchpad-and-trackpoint-issues-with-linux/431820#431820 comment out "i2c_i801" from /etc/modprobe.d/blacklist.conf
 - adding "psmouse.synaptics_intertouch=1" to the GRUB_CMDLINE_LINUX_DEFAULT= line in /etc/default/grub
 - sudo update-grub
+- reload modprobe on startup:
+
+sudo gedit /etc/rc.local and add above the EXIT 0 the following lines:
+
+rmmod psmouse
+modprobe psmouse proto=imps
+
 now:
 ```
 egrep -i 'synap|alps|etps|elan' /proc/bus/input/devices
