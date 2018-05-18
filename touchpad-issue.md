@@ -23,8 +23,8 @@ P: Phys=synaptics-rmi4-pt/serio1/input0
 
 sudo gedit /etc/rc.local and add above the EXIT 0 the following lines:
 
-rmmod psmouse
-modprobe psmouse proto=imps
+rmmod psmouse <br>
+modprobe psmouse
 
 
 ----- RESOLVED -----
